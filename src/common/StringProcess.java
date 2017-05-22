@@ -137,6 +137,6 @@ public class StringProcess {
 				String s1 = pattern.matcher(temp).replaceAll("");
 				String regex = "[a-zA-z0-9]+([ '-][a-zA-Z0-9]+)*"; 
 				return (s1.matches(regex))?false:true;
-			}  
-		 	
+			}
+
 }

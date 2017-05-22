@@ -29,40 +29,7 @@
 <html:form action="/register" styleClass="form-group" method="post">
 
 
-	<div id="choose-empMaster" class="modal fade" role="dialog" >
-	  	<div class="modal-dialog modal-sm" role="document">
-	    	<div class="modal-content">
-	      		<div class="modal-header">
-	      			<button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</span></button>
-	      			<h4 class="modal-title">プラン（メイン）を選択</h4>
-	      		</div>
-	      		<div class="modal-body">
-	      			<div class="form-group">
-	      				<label for="chooseEmpMaster">計画(主)コード</label>	      				
-	      				<html:select property="cARMM_EMPNO1" styleClass="form-control" styleId="ma_xe">
-							
-							<html:optionsCollection name="autcarmmForm"
-								property="listAUTEMPFL" label="eMPFL_EMPNO"
-								value="eMPFL_EMPNO" />
-								
-						
-	      				</html:select>
-						<label for="chooseEmpMaster">計画(主)名</label>
-						<html:select property="cARMM_EMPNO1" styleClass="form-control" styleId="ten_xe">
-						
-	      					<html:optionsCollection name="autcarmmForm"
-								property="listAUTEMPFL" label="eMPFL_EMPNM"
-								value="eMPFL_EMPNO" />
-	      				</html:select>
-	      				
-	      			</div>
-	      		</div>
-	      		<div class="modal-footer">
-					<input type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="選択">
-	      		</div>
-	    	</div>
-	  	</div>
-	</div>
+	
 	
 
 
@@ -180,7 +147,7 @@
 						    <td colspan="1">
 						    	 <html:text property="cARMM_EMPNO1" styleId="Box6${idSTT}" styleClass="form-control"></html:text>
 						    </td>
-						    <td colspan="1"><input  id="checkId_Name${idSTT}" type="button" value="参照" class="btn btn-danger" data-toggle="modal" data-target="#choose-empMaster"></td>
+						    <td colspan="1"><input  id="checkId_Name${idSTT}" type="button" value="参照" class="btn btn-danger" data-toggle="modal" data-target="#choose-empMaster${idSTT}"></td>
 						    
 						   
 						    
@@ -225,40 +192,78 @@
 						<td colspan="24" height="10px"></td>
 					</tr>
 				
+				
+			<div id="choose-empMaster${idSTT}" class="modal fade" role="dialog" >
+			  	<div class="modal-dialog modal-sm" role="document">
+			    	<div class="modal-content">
+			      		<div class="modal-header">
+			      			<button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</span></button>
+			      			<h4 class="modal-title">プラン（メイン）を選択</h4>
+			      		</div>
+			      		<div class="modal-body">
+			      			<div class="form-group">
+			      				<label for="chooseEmpMaster">計画(主)コード</label>	      				
+			      				<html:select property="cARMM_EMPNO1" styleClass="form-control" styleId="ma_xe${idSTT}">
+									
+									<html:optionsCollection name="autcarmmForm"
+										property="listAUTEMPFL" label="eMPFL_EMPNO"
+										value="eMPFL_EMPNO" />
+										
+								
+			      				</html:select>
+								<label for="chooseEmpMaster">計画(主)名</label>
+								<html:select property="cARMM_EMPNO1" styleClass="form-control" styleId="ten_xe${idSTT}">
+								
+			      					<html:optionsCollection name="autcarmmForm"
+										property="listAUTEMPFL" label="eMPFL_EMPNM"
+										value="eMPFL_EMPNO" />
+			      				</html:select>
+			      				
+			      			</div>
+			      		</div>
+			      		<div class="modal-footer">
+							<input type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="選択">
+			      		</div>
+			    	</div>
+			  	</div>
+			</div>
+				
+				
+				
 					 <script>
-						    function displayVals1() {
+						    function displayVals1${idSTT}() {
 						    
-						  	  var singleValues = $( "#ma_xe").val();
-						  		$( "input#Box6${idSTT}" ).val( singleValues);
-						  		console.log("aaaa");
-						  		$( "#ten_xe" ).val( singleValues);
-						  		var maxe =  $( "#ten_xe :selected" ).text();
-						  		$("input#Box7${idSTT}").val(maxe);
-						  		console.log(singleValues);
+						  	  var singleValues${idSTT} = $( "#ma_xe${idSTT}").val();
+						  		$( "input#Box6${idSTT}" ).val( singleValues${idSTT});
+						  		
+						  		$( "#ten_xe${idSTT}" ).val( singleValues${idSTT});
+						  		var maxe${idSTT} =  $( "#ten_xe${idSTT} :selected" ).text();
+						  		$("input#Box7${idSTT}").val(maxe${idSTT});
+						  		
 						  		
 						  	}
-						  	function displayVals2() {	 	
-						  	  var multipleValues = $( "#ten_xe :selected" ).text();
-						  	  var tenxe = $( "#ten_xe").val();
-						  	  console.log(multipleValues);
-						  	  $( "#ma_xe" ).val( tenxe);  
-						  	  $("input#Box7${idSTT}").val(multipleValues);
-						  	  $( "input#Box6${idSTT}" ).val( tenxe);
+						  	function displayVals2${idSTT}() {	 	
+						  	  var multipleValues${idSTT} = $( "#ten_xe${idSTT} :selected" ).text();
+						  	  var tenxe${idSTT} = $( "#ten_xe${idSTT}").val();
+						  	 
+						  	  $( "#ma_xe${idSTT}" ).val( tenxe${idSTT});  
+						  	  $("input#Box7${idSTT}").val(multipleValues${idSTT});
+						  	  $( "input#Box6${idSTT}" ).val( tenxe${idSTT});
 						  	 
 						  	}
 						  	
-						  	function selectt(){ 
+						  	function selectt${idSTT}(){ 
 						  		
-						  		$( "select#ma_xe" ).change( displayVals1 )
-						  			displayVals1();		
-						  		$( "select#ten_xe" ).change( displayVals2 )
-						  		displayVals2();
+						  		$( "select#ma_xe${idSTT}" ).change( displayVals1${idSTT} )
+						  			displayVals1${idSTT}();		
+						  		$( "select#ten_xe${idSTT}" ).change( displayVals2${idSTT} )
+						  		displayVals2${idSTT}();
 						  	
 						  	}
 						    
 						    $("#checkId_Name${idSTT}").click(function(){
-						    	console.log("#checkId_Name${idSTT}")
-								 selectt();
+						    	
+								 selectt${idSTT}();
 								 
 							})
 							

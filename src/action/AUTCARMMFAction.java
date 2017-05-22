@@ -136,66 +136,126 @@ public class AUTCARMMFAction extends Action {
 			ArrayList<Autcarmm> listAUTCARMM =AutcarmmBO.listAUTCARMM();
 			aUTCARMMForm.setListAUTCARMM(listAUTCARMM);
 			
-			System.out.println(aUTCARMMForm.getSubmit() +"abc");
 			
 			//nhan nut submit o trang Them them LanguaeScoer
 			if("submit".equals(aUTCARMMForm.getSubmit())){		
-				String cARMM_MKCD = aUTCARMMForm.getcARMM_MKCD();
-				String cARMM_SYCD = aUTCARMMForm.getcARMM_SYCD();
-				String cARMM_JRCNT= aUTCARMMForm.getcARMM_JRCNT();
-				String cARMM_J1CNT = aUTCARMMForm.getcARMM_J1CNT();		
-				String cARMM_LBLCT = aUTCARMMForm.getcARMM_LBLCT();		
-				String cARMM_HTKN = aUTCARMMForm.getcARMM_HTKN();	
-				String cARMM_YOBI = aUTCARMMForm.getcARMM_YOBI();
-				String cARMM_EMPNO1 = aUTCARMMForm.getcARMM_EMPNO1();
-				String eMPFL_EMPNM = aUTCARMMForm.geteMPFL_EMPNM();
-				String cARMM_EMPNO2 = aUTCARMMForm.getcARMM_EMPNO2();
-				String cARMM_EMPNO3 = aUTCARMMForm.getcARMM_EMPNO3();
-				String cARMM_EMPNO4 = aUTCARMMForm.getcARMM_EMPNO4();
-				String cARMM_EMPNO5 = aUTCARMMForm.getcARMM_EMPNO5();
-				String cARMM_EMPNO6 = aUTCARMMForm.getcARMM_EMPNO6();
-				String cARMM_EMPNO7 = aUTCARMMForm.getcARMM_EMPNO7();
-				String cARMM_EMPNO8 = aUTCARMMForm.getcARMM_EMPNO8();
-				String cARMM_EMPNO9 = aUTCARMMForm.getcARMM_EMPNO9();
-				String cARMM_EMPNO10 = aUTCARMMForm.getcARMM_EMPNO10();
+			
+				String cARMM_MKCD;
+				String cARMM_SYCD;
+				String cARMM_JRCNT = null;
+				String cARMM_J1CNT = null;
+				String cARMM_LBLCT = null;
+				String cARMM_HTKN = null;
+				String cARMM_YOBI = null;
+				String cARMM_EMPNO1 = null;
+				String cARMM_EMPNO2 = null;
+				String cARMM_EMPNO3 = null;
+				String cARMM_EMPNO4 = null;
+				String cARMM_EMPNO5 = null;
+				String cARMM_EMPNO6 = null;
+				String cARMM_EMPNO7 = null;
+				String cARMM_EMPNO8  = null;
+				String cARMM_EMPNO9 = null;
+				String cARMM_EMPNO10 = null;
+				String eMPFL_EMPNM = null;
+				String cARMM_KUBUN1 =null;
+				String cARMM_KUBUN2 =null;
+				String cARMM_KUBUN3 =null;
+				String cARMM_KUBUN4 =null;
+				String cARMM_KUBUN5 =null;
+				String cARMM_KUBUN6 =null;
+				String cARMM_KUBUN7 =null;
+				String cARMM_KUBUN8 =null;
+				String cARMM_KUBUN9 =null;
+				String cARMM_KUBUN10 =null;
+				
+
 				//kiem tra xem account co ton tai hay khong
 //				if(languageBO.checkAccount(account)) { 
 //					//in ra dong loi
 //					actionErrors.add("accError", new ActionMessage("error.trung.so")); 
 //					
 //				} saveErrors(request, actionErrors);
-				if(StringProcess.notVaildNumber(cARMM_JRCNT)){
-					actionErrors.add("accError", new ActionMessage("error.trung.so"));
-				}
+				
+				int i = 0;								
+				while(i <3)
+
+				{
+					String[] cARMM_MKCDarr = aUTCARMMForm.getcARMM_MKCD();
+					String[] cARMM_SYCDarr = aUTCARMMForm.getcARMM_SYCD();
+					String[] cARMM_JRCNTarr= aUTCARMMForm.getcARMM_JRCNT();
+					String[] cARMM_J1CNTarr = aUTCARMMForm.getcARMM_J1CNT();		
+					String[] cARMM_LBLCTarr = aUTCARMMForm.getcARMM_LBLCT();		
+					String[] cARMM_HTKNarr = aUTCARMMForm.getcARMM_HTKN();	
+					String[] cARMM_YOBIarr = aUTCARMMForm.getcARMM_YOBI();
+					String[] cARMM_EMPNO1arr = aUTCARMMForm.getcARMM_EMPNO1();
+					String[] eMPFL_EMPNMarr = aUTCARMMForm.geteMPFL_EMPNM();
+					String[] cARMM_EMPNO2arr = aUTCARMMForm.getcARMM_EMPNO2();
+					String[] cARMM_EMPNO3arr = aUTCARMMForm.getcARMM_EMPNO3();
+					String[] cARMM_EMPNO4arr = aUTCARMMForm.getcARMM_EMPNO4();
+					String[] cARMM_EMPNO5arr = aUTCARMMForm.getcARMM_EMPNO5();
+					String[] cARMM_EMPNO6arr = aUTCARMMForm.getcARMM_EMPNO6();
+					String[] cARMM_EMPNO7arr = aUTCARMMForm.getcARMM_EMPNO7();
+					String[] cARMM_EMPNO8arr = aUTCARMMForm.getcARMM_EMPNO8();
+					String[] cARMM_EMPNO9arr = aUTCARMMForm.getcARMM_EMPNO9();
+					String[] cARMM_EMPNO10arr = aUTCARMMForm.getcARMM_EMPNO10();
 					
-				if(StringProcess.notVaildNumber(cARMM_J1CNT)){
-					actionErrors.add("accError", new ActionMessage("error.trung.so"));
-				}
-				if(StringProcess.notVaildNumber(cARMM_LBLCT)){
-					actionErrors.add("accError", new ActionMessage("error.trung.so"));
-				}
-				if(StringProcess.notVaildNumber(cARMM_HTKN)){
-					actionErrors.add("accError", new ActionMessage("error.trung.so"));
-				}saveErrors(request, actionErrors);
-				if(actionErrors.size()>0){
-					System.out.println("111");
-					//chuyen qua trang them Language Score
-					return mapping.findForward("register"); 
-				} else {
+					
+					cARMM_MKCD = aUTCARMMForm.getcARMM_MKCD()[i];
+					cARMM_SYCD = aUTCARMMForm.getcARMM_SYCD()[i];
+					
+					
+					Autcarmm autcarmm = new Autcarmm(cARMM_MKCD, cARMM_SYCD, cARMM_JRCNT, cARMM_J1CNT,cARMM_LBLCT,cARMM_HTKN,cARMM_EMPNO1,cARMM_EMPNO2,cARMM_EMPNO3,cARMM_EMPNO4,cARMM_EMPNO5,
+							cARMM_EMPNO6,cARMM_EMPNO7,cARMM_EMPNO8,cARMM_EMPNO9,cARMM_EMPNO10, cARMM_KUBUN1, cARMM_KUBUN2, cARMM_KUBUN3, cARMM_KUBUN4, cARMM_KUBUN5, cARMM_KUBUN6, cARMM_KUBUN7, cARMM_KUBUN8, cARMM_KUBUN9, cARMM_KUBUN10);
+					
+					System.out.println("kiem tra ne");
+					if(autcarmmBO.checkKey(cARMM_MKCD,cARMM_SYCD)==true){
+						System.out.println("ádfsa23423434");
+						autcarmmBO.register(autcarmm);	
+					}
+					else {
+						System.out.println("ádasdhjkasdhkas");
+					}
+					i++;
+				
+//				if(StringProcess.notVaildNumber(cARMM_JRCNT[i])){
+//					actionErrors.add("accError", new ActionMessage("error.trung.so"));
+//				}
+//					
+//				if(StringProcess.notVaildNumber(cARMM_J1CNT[i])){
+//					actionErrors.add("accError", new ActionMessage("error.trung.so"));
+//				}
+//				if(StringProcess.notVaildNumber(cARMM_LBLCT[i])){
+//					actionErrors.add("accError", new ActionMessage("error.trung.so"));
+//				}
+//				if(StringProcess.notVaildNumber(cARMM_HTKN[i])){
+//					actionErrors.add("accError", new ActionMessage("error.trung.so"));
+//				}saveErrors(request, actionErrors);
+//				if(actionErrors.size()>0){
+//					System.out.println("111");
+//					//chuyen qua trang them Language Score
+//					return mapping.findForward("register"); 
+				//} else {
 					System.out.println("toi day chua!!!!!");
-					int cARMM_JRCNT_int = Integer.parseInt(cARMM_JRCNT);
-					int cARMM_J1CNT_int = Integer.parseInt(cARMM_JRCNT);
-					int cARMM_LBLCT_int = Integer.parseInt(cARMM_JRCNT);
-					int cARMM_HTKN_int = Integer.parseInt(cARMM_JRCNT);
-				autcarmmBO.register(cARMM_MKCD, cARMM_SYCD, cARMM_JRCNT_int, cARMM_J1CNT_int,cARMM_LBLCT_int,cARMM_HTKN_int,cARMM_YOBI,cARMM_EMPNO1,eMPFL_EMPNM,cARMM_EMPNO2,cARMM_EMPNO3,cARMM_EMPNO4,cARMM_EMPNO5,
-						cARMM_EMPNO6,cARMM_EMPNO7,cARMM_EMPNO8,cARMM_EMPNO9,cARMM_EMPNO10);
+//					int cARMM_JRCNT_int = Integer.parseInt(cARMM_JRCNT[i]);
+//					int cARMM_J1CNT_int = Integer.parseInt(cARMM_JRCNT[i]);
+//					int cARMM_LBLCT_int = Integer.parseInt(cARMM_JRCNT[i]);
+//					int cARMM_HTKN_int = Integer.parseInt(cARMM_JRCNT[i]);
+//				autcarmmBO.register(cARMM_MKCD, cARMM_SYCD, cARMM_JRCNT, cARMM_J1CNT,cARMM_LBLCT,cARMM_HTKN,cARMM_YOBI,cARMM_EMPNO1,eMPFL_EMPNM,cARMM_EMPNO2,cARMM_EMPNO3,cARMM_EMPNO4,cARMM_EMPNO5,
+//						cARMM_EMPNO6,cARMM_EMPNO7,cARMM_EMPNO8,cARMM_EMPNO9,cARMM_EMPNO10);
 				//chuyen qua trang danh sach Language Score
-				return mapping.findForward("registerSuccess"); 
+				
+			//	}
 				}
+				return mapping.findForward("registerSuccess"); 
 			} else {		
 				//chuyen trang them Language Score
 				return mapping.findForward("register"); 
 			}
+		
+			
+			
+			
 			
 			
 		

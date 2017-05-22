@@ -1,5 +1,9 @@
 package model.bean;
 
+/**
+ * @author HCD-Fresher149
+ *
+ */
 public class Autcarmm {
 
 	private String cARMM_MKCD;
@@ -28,6 +32,46 @@ public class Autcarmm {
 	private String cARMM_KUBUN8;
 	private String cARMM_KUBUN9;
 	private String cARMM_KUBUN10;
+	
+	
+	
+	
+	
+	
+	public Autcarmm(String cARMM_MKCD, String cARMM_SYCD, String cARMM_EMPNO1, String cARMM_EMPNO2, String cARMM_EMPNO3,
+			String cARMM_EMPNO4, String cARMM_EMPNO5, String cARMM_EMPNO6, String cARMM_EMPNO7, String cARMM_EMPNO8,
+			String cARMM_EMPNO9, String cARMM_EMPNO10, String cARMM_JRCNT, String cARMM_J1CNT, String cARMM_LBLCT,
+			String cARMM_HTKN, String cARMM_KUBUN1, String cARMM_KUBUN2, String cARMM_KUBUN3, String cARMM_KUBUN4,
+			String cARMM_KUBUN5, String cARMM_KUBUN6, String cARMM_KUBUN7, String cARMM_KUBUN8, String cARMM_KUBUN9,
+			String cARMM_KUBUN10) {
+		super();
+		this.cARMM_MKCD = cARMM_MKCD;
+		this.cARMM_SYCD = cARMM_SYCD;
+		this.cARMM_EMPNO1 = cARMM_EMPNO1;
+		this.cARMM_EMPNO2 = cARMM_EMPNO2;
+		this.cARMM_EMPNO3 = cARMM_EMPNO3;
+		this.cARMM_EMPNO4 = cARMM_EMPNO4;
+		this.cARMM_EMPNO5 = cARMM_EMPNO5;
+		this.cARMM_EMPNO6 = cARMM_EMPNO6;
+		this.cARMM_EMPNO7 = cARMM_EMPNO7;
+		this.cARMM_EMPNO8 = cARMM_EMPNO8;
+		this.cARMM_EMPNO9 = cARMM_EMPNO9;
+		this.cARMM_EMPNO10 = cARMM_EMPNO10;
+		this.cARMM_JRCNT = cARMM_JRCNT;
+		this.cARMM_J1CNT = cARMM_J1CNT;
+		this.cARMM_LBLCT = cARMM_LBLCT;
+		this.cARMM_HTKN = cARMM_HTKN;
+		this.cARMM_KUBUN1 = cARMM_KUBUN1;
+		this.cARMM_KUBUN2 = cARMM_KUBUN2;
+		this.cARMM_KUBUN3 = cARMM_KUBUN3;
+		this.cARMM_KUBUN4 = cARMM_KUBUN4;
+		this.cARMM_KUBUN5 = cARMM_KUBUN5;
+		this.cARMM_KUBUN6 = cARMM_KUBUN6;
+		this.cARMM_KUBUN7 = cARMM_KUBUN7;
+		this.cARMM_KUBUN8 = cARMM_KUBUN8;
+		this.cARMM_KUBUN9 = cARMM_KUBUN9;
+		this.cARMM_KUBUN10 = cARMM_KUBUN10;
+	}
 	/**
 	 * @return the cARMM_MKCD
 	 */
