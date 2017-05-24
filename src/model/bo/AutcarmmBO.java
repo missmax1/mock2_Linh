@@ -37,5 +37,10 @@ public class AutcarmmBO {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public boolean checkExist(String cARMM_EMPNO1, String eMPFL_EMPNM) throws Exception {
+		// TODO Auto-generated method stub
+		return autcarmmDAO.checkExist(cARMM_EMPNO1 ,eMPFL_EMPNM);
+	}
 	
 }

@@ -4,6 +4,7 @@
 <%@page import="model.bean.Account"%>
 <%@page import="model.bean.Language"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="model.bean.Autcarmm"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%>
@@ -48,7 +49,12 @@
 			 	</div>
 
 				 <div class="errormessagee" style="color:red;padding: 10px">
-				 	<<< エラーメッセージ >>>
+				 	<p style="color:red" id="p1"><html:errors property="numberError"/></p> 
+				 	<p style="color:red" id="p1"><html:errors property="cARMM_MKCDError"/></p>
+				 	<p style="color:red" id="p1"><html:errors property="maxcARMM_JRCNTError"/></p>	
+				 	<p style="color:red" id="p1"><html:errors property="characterError"/></p>	
+				 	<p style="color:red" id="p1"><html:errors property="existDBError"/></p>	
+				 				 	  
 				 </div>
 			 
 			 		
@@ -62,8 +68,8 @@
 					    <th colspan="1" style="width: 6%; text-align: center;">Ｊ１件数</th>
 					    <th colspan="4" style="width: 50px; text-align: center;">台紙ラベル単位</th>
 					    <th colspan="4" style="width: 50px; text-align: center;">発注可能期間</th>
-					    <th colspan="3" style="width: 50px; text-align: center;">発注可能期間</th>
-					    <th colspan="2" style="width: 10%; text-align: center;">処理対象フラッグ</th>
+					    <th colspan="4" style="width: 50px; text-align: center;">処理対象フラッグ</th>
+					    <th colspan="2" style="width: 10%; text-align: center;border-left-style: hidden;"></th>
 					  </tr>
 					  <tr>
 					    <th colspan="23" style="width: 50px; text-align: center;">担当者</th>
@@ -96,26 +102,26 @@
 					<logic:iterate name="autcarmmForm" property="stt" id="st">	
 					<bean:define id="idSTT" name="st" ></bean:define>	
 						  
-						  <tr id ="${ idSTT}">
+						  <tr id ="${idSTT}">
 						  
 						  <tr >
 						    <td rowspan="3" style="width: 50px; text-align: center;"> <bean:write name="st"/> </td>
 						    <td colspan="4">
 						    				    	
 						    
-								<html:select property="cARMM_MKCD" styleClass="form-control" styleId="cb01">
-									<option value="">Please select..</option>
+								<html:select property="arrcARMM_MKCD[${idSTT}]" styleClass="form-control" styleId="cb01">
+									<option value="0">Please select..</option>
 									<html:optionsCollection name="autcarmmForm"
 										property="listAUTMFOPM" label="mFOPM_NAME"
 										value="mFOPM_TRCD" />
 								</html:select>
-								
+							
 						    </td>
 						    <td colspan="3">
 						    	
-						    	<html:select property="cARMM_SYCD" styleClass="form-control" styleId="cb02">
+						    	<html:select property="arrcARMM_SYCD[${idSTT}]" styleClass="form-control" styleId="cb02">
 						    		
-									<option value="">Please select..</option>
+									<option value="0">Please select..</option>
 									<html:optionsCollection name="autcarmmForm"
 										property="listAUTCARNM" label="cARNM_NAME"
 										value="cARNM_SHSYCD" />
@@ -123,20 +129,20 @@
 						    	
 						    </td>
 						    <td colspan="2">
-						    <html:text property="cARMM_JRCNT" styleId="Box1" styleClass="form-control"></html:text>	
+						    <html:text property="arrcARMM_JRCNT[${idSTT}]" styleId="Box1" styleClass="form-control"></html:text>	
 						    	
 						    </td>
 						    <td colspan="2">
-						    	 <html:text property="cARMM_J1CNT" styleId="Box2" styleClass="form-control"></html:text>	
+						    	 <html:text property="arrcARMM_J1CNT[${idSTT}]" styleId="Box2" styleClass="form-control"></html:text>	
 						    </td>
 						    <td colspan="3">
-						    	 <html:text property="cARMM_LBLCT" styleId="Box3" styleClass="form-control"></html:text>	
+						    	 <html:text property="arrcARMM_LBLCT[${idSTT}]" styleId="Box3" styleClass="form-control"></html:text>	
 						    </td>
 						    <td colspan="4">
-						    	 <html:text property="cARMM_HTKN" styleId="Box4" styleClass="form-control"></html:text>	
+						    	 <html:text property="arrcARMM_HTKN[${idSTT}]" styleId="Box4" styleClass="form-control"></html:text>	
 						    </td>
 						    <td colspan="3">
-						    	 <html:text property="cARMM_YOBI" styleId="Box5" styleClass="form-control"></html:text>	
+						    	 <html:text property="arrcARMM_YOBI[${idSTT}]" styleId="Box5" styleClass="form-control"></html:text>	
 						    </td>
 						    <td colspan="2" style="border-bottom-style: hidden;">
 						    
@@ -145,44 +151,44 @@
 						  
 						  <tr>
 						    <td colspan="1">
-						    	 <html:text property="cARMM_EMPNO1" styleId="Box6${idSTT}" styleClass="form-control"></html:text>
+						    	 <html:text property="arrcARMM_EMPNO1[${idSTT}]" styleId="Box6${idSTT}" styleClass="form-control"></html:text>
 						    </td>
-						    <td colspan="1"><input  id="checkId_Name${idSTT}" type="button" value="参照" class="btn btn-danger" data-toggle="modal" data-target="#choose-empMaster${idSTT}"></td>
+						    <td colspan="1"><input  id="checkId_Name[${idSTT}]" type="button" value="参照" class="btn btn-danger" data-toggle="modal" data-target="#choose-empMaster${idSTT}"></td>
 						    
 						   
 						    
 						    
 						    <td colspan="3">
-						    	<html:text property="eMPFL_EMPNM" styleId="Box7${idSTT}" styleClass="form-control"></html:text>
+						    	<html:text property="arreMPFL_EMPNM[${idSTT}]" styleId="Box7${idSTT}" styleClass="form-control"></html:text>
 						    </td>
 						    <td colspan="1">
-						    	<html:text property="cARMM_EMPNO2" styleId="cARMM_EMPNO2" styleClass="form-control"></html:text>
+						    	<html:text property="arrcARMM_EMPNO2[${idSTT}]" styleId="cARMM_EMPNO2" styleClass="form-control"></html:text>
 						    </td>
 						    <td colspan="1">
-						    	<html:text property="cARMM_EMPNO3" styleId="cARMM_EMPNO3" styleClass="form-control"></html:text>
+						    	<html:text property="arrcARMM_EMPNO3[${idSTT}]" styleId="cARMM_EMPNO3" styleClass="form-control"></html:text>
 						    </td>
 						    <td colspan="3">
-						    	<html:text property="cARMM_EMPNO4" styleId="cARMM_EMPNO4" styleClass="form-control"></html:text>
+						    	<html:text property="arrcARMM_EMPNO4[${idSTT}]" styleId="cARMM_EMPNO4" styleClass="form-control"></html:text>
 						    </td>
 						    <td colspan="3">
-						    	<html:text property="cARMM_EMPNO5" styleId="cARMM_EMPNO5" styleClass="form-control"></html:text>
+						    	<html:text property="arrcARMM_EMPNO5[${idSTT}]" styleId="cARMM_EMPNO5" styleClass="form-control"></html:text>
 						    </td>
 						    <td colspan="3">
-						    	<html:text property="cARMM_EMPNO6" styleId="cARMM_EMPNO6" styleClass="form-control"></html:text>
+						    	<html:text property="arrcARMM_EMPNO6[${idSTT}]" styleId="cARMM_EMPNO6" styleClass="form-control"></html:text>
 						    </td>
 						    <td colspan="1">
-						    	<html:text property="cARMM_EMPNO7" styleId="cARMM_EMPNO7" styleClass="form-control"></html:text>
+						    	<html:text property="arrcARMM_EMPNO7[${idSTT}]" styleId="cARMM_EMPNO7" styleClass="form-control"></html:text>
 						    </td>
 						   
 
 						    <td colspan="2">
-						    	<html:text property="cARMM_EMPNO8" styleId="cARMM_EMPNO8" styleClass="form-control"></html:text>
+						    	<html:text property="arrcARMM_EMPNO8[${idSTT}]" styleId="cARMM_EMPNO8" styleClass="form-control"></html:text>
 						    </td>
 						    <td colspan="1">
-						    	<html:text property="cARMM_EMPNO9" styleId="cARMM_EMPNO9" styleClass="form-control"></html:text>
+						    	<html:text property="arrcARMM_EMPNO9[${idSTT}]" styleId="cARMM_EMPNO9" styleClass="form-control"></html:text>
 						    </td>
 						    <td colspan="2">
-						    	<html:text property="cARMM_EMPNO10" styleId="cARMM_EMPNO10" styleClass="form-control"></html:text>
+						    	<html:text property="arrcARMM_EMPNO10[${idSTT}]" styleId="cARMM_EMPNO10" styleClass="form-control"></html:text>
 						    </td>
 						    <td colspan="1"></td>
 						  </tr>
@@ -193,7 +199,8 @@
 					</tr>
 				
 				
-			<div id="choose-empMaster${idSTT}" class="modal fade" role="dialog" >
+				
+				<div id="choose-empMaster${idSTT}" class="modal fade" role="dialog" >
 			  	<div class="modal-dialog modal-sm" role="document">
 			    	<div class="modal-content">
 			      		<div class="modal-header">
@@ -203,8 +210,8 @@
 			      		<div class="modal-body">
 			      			<div class="form-group">
 			      				<label for="chooseEmpMaster">計画(主)コード</label>	      				
-			      				<html:select property="cARMM_EMPNO1" styleClass="form-control" styleId="ma_xe${idSTT}">
-									
+			      				<html:select property="arrcARMM_EMPNO1" styleClass="form-control" styleId="ma_xe${idSTT}">
+									<option value=""></option>
 									<html:optionsCollection name="autcarmmForm"
 										property="listAUTEMPFL" label="eMPFL_EMPNO"
 										value="eMPFL_EMPNO" />
@@ -212,8 +219,8 @@
 								
 			      				</html:select>
 								<label for="chooseEmpMaster">計画(主)名</label>
-								<html:select property="cARMM_EMPNO1" styleClass="form-control" styleId="ten_xe${idSTT}">
-								
+								<html:select property="arrcARMM_EMPNO1" styleClass="form-control" styleId="ten_xe${idSTT}">
+									<option value=""></option>
 			      					<html:optionsCollection name="autcarmmForm"
 										property="listAUTEMPFL" label="eMPFL_EMPNM"
 										value="eMPFL_EMPNO" />
@@ -227,6 +234,9 @@
 			    	</div>
 			  	</div>
 			</div>
+				
+				
+			
 				
 				
 				
@@ -268,7 +278,7 @@
 							})
 							
 							
-						    </script>
+					</script>
 					
 				
 				

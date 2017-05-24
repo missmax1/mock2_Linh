@@ -18,6 +18,7 @@ public class AutcarmmDAO {
 	String password = "12345678";
 	Connection connection;
 	Statement stmt;
+	private int num = 0;
 	/**
 	 * Kết nối csdl
 	 * 
@@ -119,35 +120,75 @@ public class AutcarmmDAO {
 
 
 	public boolean checkKey(String cARMM_MKCD, String cARMM_SYCD) throws Exception   {
-		String sql = "select CARMM_MKCD,CARMM_SYCD from AUTCARMM where CARMM_MKCD = '"+cARMM_MKCD+"' and CARMM_SYCD = "+cARMM_SYCD+" ";
+		String sql = "select CARMM_MKCD,CARMM_SYCD, count(*) as dem from AUTCARMM where CARMM_MKCD = '"+cARMM_MKCD+"' and CARMM_SYCD = "+cARMM_SYCD+" group by CARMM_MKCD,CARMM_SYCD  ";
 		connect();
-		ResultSet rs;
+		
+		System.out.println(sql);
+		ResultSet rs = null;
 		try {
 			stmt = connection.createStatement();
 			rs = stmt.executeQuery(sql);
+
 			while (rs.next()) {
-				rs.getInt(1);
-				System.out.println(rs.getInt(1));
+				num = rs.getInt("dem");
+				System.out.println(num);
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (Exception e) {
+			throw new Exception("Error occur: "+ e.getMessage());
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (SQLException e) {
+				throw new SQLException("Error occur: "+ e.getMessage());
+			}
 		}
 		
-		
-		
-		
-		
-		return false;
-		
-		
+		return (num != 0)? true : false;		
 		
 	
 		
-			
 	
 			
 		
+	}
+
+
+	public boolean checkExist(String cARMM_EMPNO1, String eMPFL_EMPNM) throws Exception {
+		String sql = " select EMPFL_EMPNO,EMPFL_EMPNM, count(*) as dem from AUTEMPFL where EMPFL_EMPNO ="+
+						" '"+cARMM_EMPNO1+"' and EMPFL_EMPNM = '"+eMPFL_EMPNM+"' group by EMPFL_EMPNO,EMPFL_EMPNM  ";	
+		
+		connect();
+		
+		System.out.println("2"+sql);
+		ResultSet rs = null;
+		try {
+			stmt = connection.createStatement();
+			rs = stmt.executeQuery(sql);
+
+			while (rs.next()) {
+				num = rs.getInt("dem");
+			}
+		} catch (Exception e) {
+			throw new Exception("Error occur: "+ e.getMessage());
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (SQLException e) {
+				throw new SQLException("Error occur: "+ e.getMessage());
+			}
+		}
+		
+		return (num != 0)? true : false;
 	}
 
 
