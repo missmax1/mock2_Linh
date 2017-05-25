@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
@@ -18,30 +17,45 @@ import model.bean.Autcarmm;
 import model.bean.Autcarnm;
 import model.bean.Autempfl;
 import model.bean.Autmfopm;
-
 import model.bo.AutcarmmBO;
 import model.bo.AutempflBO;
 import model.bo.AutmcarnmBO;
 import model.bo.AutmfopmBO;
 
+
+/**
+ * AUTCARMMFAction.java
+ *
+ * Version 1.1
+ *
+ * Date: 18-05-2017
+ *
+ * Copyright
+ *
+ * Modification Logs: 
+ * DATE 			AUTHOR		 	DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 22-05-2017 		LinhTN8 		Create
+ */
 public class AUTCARMMFAction extends Action {
 
-	private String cARMM_KUBUNs[];
-
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Method execute action form
 	 * 
-	 * @see org.apache.struts.action.Action#execute(org.apache.struts.action.
-	 * ActionMapping, org.apache.struts.action.ActionForm,
-	 * javax.servlet.http.HttpServletRequest,
-	 * javax.servlet.http.HttpServletResponse)
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return ActionForward addNew || addNewSuccess || addError || error
 	 */
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
 		// set mã UTF-8
+		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		AUTCARMMForm aUTCARMMForm = (AUTCARMMForm) form;
 
 		// lay ds cac Autmfopm
@@ -59,6 +73,7 @@ public class AUTCARMMFAction extends Action {
 		ArrayList<Autempfl> listAUTEMPFL = autempflBO.listAUTEMPFL();
 		aUTCARMMForm.setListAUTEMPFL(listAUTEMPFL);
 
+		// tao cac thuoc tinh cho doi tuong Autcarmm
 		String cARMM_MKCD;
 		String cARMM_SYCD;
 		String cARMM_JRCNT;
@@ -93,12 +108,15 @@ public class AUTCARMMFAction extends Action {
 		ArrayList<Autcarmm> listAUTCARMM = AutcarmmBO.listAUTCARMM();
 		aUTCARMMForm.setListAUTCARMM(listAUTCARMM);
 
-		// nhan nut submit o trang them language
+		//  登録(Ｎ) kiểm tra các input khi insert vào DB
 		if ("登録(Ｎ)".equals(aUTCARMMForm.getSubmit())) {
 			ActionErrors actionErrors = new ActionErrors();
 			int j = 1;
+			
+			// tạo vòng lặp từ 1 đến 10 bản ghi
 			while (j < 11) {
-
+				
+				//lấy giá trị từ Form
 				cARMM_MKCD = aUTCARMMForm.getArrcARMM_MKCD(j);
 				cARMM_SYCD = aUTCARMMForm.getArrcARMM_SYCD(j);
 				cARMM_JRCNT = aUTCARMMForm.getArrcARMM_JRCNT(j);
@@ -127,11 +145,12 @@ public class AUTCARMMFAction extends Action {
 				cARMM_KUBUN8 = aUTCARMMForm.getArrcARMM_KUBUN8(j);
 				cARMM_KUBUN9 = aUTCARMMForm.getArrcARMM_KUBUN9(j);
 				cARMM_KUBUN10 = aUTCARMMForm.getArrcARMM_KUBUN10(j);
-				
-				
-				if(!StringProcess.isBlankItem(cARMM_MKCD,cARMM_SYCD,cARMM_JRCNT,cARMM_J1CNT,cARMM_LBLCT,cARMM_HTKN,cARMM_EMPNO1,eMPFL_EMPNM,
-						cARMM_EMPNO2,cARMM_EMPNO3,cARMM_EMPNO4,cARMM_EMPNO5,cARMM_EMPNO6,cARMM_EMPNO7,cARMM_EMPNO8,cARMM_EMPNO9,cARMM_EMPNO10,cARMM_YOBI)) {
-				
+
+				// kiểm tra tất cả các trường trống
+				if (!StringProcess.isBlankItem(cARMM_MKCD, cARMM_SYCD, cARMM_JRCNT, cARMM_J1CNT, cARMM_LBLCT,
+						cARMM_HTKN, cARMM_EMPNO1, eMPFL_EMPNM, cARMM_EMPNO2, cARMM_EMPNO3, cARMM_EMPNO4, cARMM_EMPNO5,
+						cARMM_EMPNO6, cARMM_EMPNO7, cARMM_EMPNO8, cARMM_EMPNO9, cARMM_EMPNO10, cARMM_YOBI)) {
+
 					// kiem tra xem メーカー(*) có rỗng hay k?
 					if (StringProcess.notVaild(aUTCARMMForm.getArrcARMM_MKCD(j))) {
 						actionErrors.add("cARMM_MKCDError", new ActionMessage("error.car.trong"));
@@ -156,7 +175,7 @@ public class AUTCARMMFAction extends Action {
 					if (StringProcess.getMaxlength5String(aUTCARMMForm.getArrcARMM_JRCNT(j).trim())) {
 						actionErrors.add("maxcARMM_JRCNTError", new ActionMessage("error.jrcnt.max"));
 					}
-					
+
 					// kiem tra cARMM_J1CNT nhap chu
 					if (StringProcess.notVaildNumber(cARMM_J1CNT)) {
 						actionErrors.add("numberError", new ActionMessage("error.car.so"));
@@ -173,8 +192,7 @@ public class AUTCARMMFAction extends Action {
 					if (StringProcess.getMaxlength5String(cARMM_J1CNT)) {
 						actionErrors.add("maxcARMM_JRCNTError", new ActionMessage("error.jrcnt.max"));
 					}
-					
-					
+
 					// kiem tra cARMM_LBLCT nhap chu
 					if (StringProcess.notVaildNumber(cARMM_LBLCT)) {
 						actionErrors.add("numberError", new ActionMessage("error.car.so"));
@@ -191,7 +209,7 @@ public class AUTCARMMFAction extends Action {
 					if (StringProcess.getMaxlength3String(cARMM_LBLCT)) {
 						actionErrors.add("maxcARMM_JRCNTError", new ActionMessage("error.jrcnt.max"));
 					}
-					
+
 					// kiem tra cARMM_HTKN nhap chu
 					if (StringProcess.notVaildNumber(cARMM_HTKN)) {
 						actionErrors.add("numberError", new ActionMessage("error.car.so"));
@@ -216,31 +234,30 @@ public class AUTCARMMFAction extends Action {
 					if (StringProcess.isSpecialCharacters(cARMM_YOBI)) {
 						actionErrors.add("characterError", new ActionMessage("error.character"));
 					}
-					
-					// kiem tra xem 計画(主)コード  có rỗng hay k?
+
+					// kiem tra xem 計画(主)コード có rỗng hay k?
 					if (StringProcess.notVaild(cARMM_EMPNO1)) {
 						actionErrors.add("cARMM_MKCDError", new ActionMessage("error.car.trong"));
 					}
 					// nhap max >5 計画(主)コード
 					if (StringProcess.getMaxlength5String(cARMM_EMPNO1)) {
 						actionErrors.add("maxcARMM_JRCNTError", new ActionMessage("error.jrcnt.max"));
-					}	
-					
-					
-					// nhap max >5  計画(主)名
+					}
+
+					// nhap max >5 計画(主)名
 					if (StringProcess.getMaxlength10String(eMPFL_EMPNM)) {
 						actionErrors.add("maxcARMM_JRCNTError", new ActionMessage("error.jrcnt.max"));
-					}	
-					// kiem tra xem 計画(主)名  có rỗng hay k?
+					}
+					// kiem tra xem 計画(主)名 có rỗng hay k?
 					if (StringProcess.notVaild(eMPFL_EMPNM)) {
 						actionErrors.add("cARMM_MKCDError", new ActionMessage("error.car.trong"));
 					}
-					//check 計画(主)コード and 計画(主)名 trong data co hay khong?
-					if (!autcarmmBO.checkExist(cARMM_EMPNO1,eMPFL_EMPNM)) {
+					// check 計画(主)コード and 計画(主)名 trong data co hay khong?
+					if (!autcarmmBO.checkExist(cARMM_EMPNO1, eMPFL_EMPNM)) {
 						actionErrors.add("existDBError", new ActionMessage("error.exist.db"));
-					}	
-					
-					// nhap max >5  計画(従)
+					}
+
+					// nhap max >5 計画(従)
 					if (StringProcess.getMaxlength5String(cARMM_EMPNO2)) {
 						actionErrors.add("maxcARMM_JRCNTError", new ActionMessage("error.jrcnt.max"));
 					}
@@ -248,7 +265,7 @@ public class AUTCARMMFAction extends Action {
 					if (StringProcess.isSpecialCharacters(cARMM_EMPNO2)) {
 						actionErrors.add("characterError", new ActionMessage("error.character"));
 					}
-					// nhap max >5  主製造技術
+					// nhap max >5 主製造技術
 					if (StringProcess.getMaxlength5String(cARMM_EMPNO3)) {
 						actionErrors.add("maxcARMM_JRCNTError", new ActionMessage("error.jrcnt.max"));
 					}
@@ -256,7 +273,7 @@ public class AUTCARMMFAction extends Action {
 					if (StringProcess.isSpecialCharacters(cARMM_EMPNO3)) {
 						actionErrors.add("characterError", new ActionMessage("error.character"));
 					}
-					
+
 					// nhap max >5 副製造技術
 					if (StringProcess.getMaxlength5String(cARMM_EMPNO4)) {
 						actionErrors.add("maxcARMM_JRCNTError", new ActionMessage("error.jrcnt.max"));
@@ -265,7 +282,7 @@ public class AUTCARMMFAction extends Action {
 					if (StringProcess.isSpecialCharacters(cARMM_EMPNO4)) {
 						actionErrors.add("characterError", new ActionMessage("error.character"));
 					}
-					// nhap max >5  主技術ｻｰﾋﾞｽ
+					// nhap max >5 主技術ｻｰﾋﾞｽ
 					if (StringProcess.getMaxlength5String(cARMM_EMPNO5)) {
 						actionErrors.add("maxcARMM_JRCNTError", new ActionMessage("error.jrcnt.max"));
 					}
@@ -273,7 +290,7 @@ public class AUTCARMMFAction extends Action {
 					if (StringProcess.isSpecialCharacters(cARMM_EMPNO5)) {
 						actionErrors.add("characterError", new ActionMessage("error.character"));
 					}
-					
+
 					// nhap max >5 副技術ｻｰﾋﾞｽ
 					if (StringProcess.getMaxlength5String(cARMM_EMPNO6)) {
 						actionErrors.add("maxcARMM_JRCNTError", new ActionMessage("error.jrcnt.max"));
@@ -282,7 +299,7 @@ public class AUTCARMMFAction extends Action {
 					if (StringProcess.isSpecialCharacters(cARMM_EMPNO6)) {
 						actionErrors.add("characterError", new ActionMessage("error.character"));
 					}
-					// nhap max >5  主営業
+					// nhap max >5 主営業
 					if (StringProcess.getMaxlength5String(cARMM_EMPNO7)) {
 						actionErrors.add("maxcARMM_JRCNTError", new ActionMessage("error.jrcnt.max"));
 					}
@@ -290,8 +307,8 @@ public class AUTCARMMFAction extends Action {
 					if (StringProcess.isSpecialCharacters(cARMM_EMPNO7)) {
 						actionErrors.add("characterError", new ActionMessage("error.character"));
 					}
-					
-					// nhap max >5  副営業
+
+					// nhap max >5 副営業
 					if (StringProcess.getMaxlength5String(cARMM_EMPNO8)) {
 						actionErrors.add("maxcARMM_JRCNTError", new ActionMessage("error.jrcnt.max"));
 					}
@@ -307,8 +324,8 @@ public class AUTCARMMFAction extends Action {
 					if (StringProcess.isSpecialCharacters(cARMM_EMPNO9)) {
 						actionErrors.add("characterError", new ActionMessage("error.character"));
 					}
-					
-					// nhap max >5  副業務
+
+					// nhap max >5 副業務
 					if (StringProcess.getMaxlength5String(cARMM_EMPNO10)) {
 						actionErrors.add("maxcARMM_JRCNTError", new ActionMessage("error.jrcnt.max"));
 					}
@@ -316,8 +333,7 @@ public class AUTCARMMFAction extends Action {
 					if (StringProcess.isSpecialCharacters(cARMM_EMPNO10)) {
 						actionErrors.add("characterError", new ActionMessage("error.character"));
 					}
-					
-					
+
 					saveErrors(request, actionErrors); // luu lai nhung dong loi
 					if (actionErrors.size() > 0) {
 						// chuyen qua trang them LanguaeScoer va hien ra cac loi
@@ -328,17 +344,17 @@ public class AUTCARMMFAction extends Action {
 			}
 		}
 
-		// nhan nut submit o trang
+		// nhan nut 登録(Ｎ) o trang để insert vào DB
 		if ("登録(Ｎ)".equals(aUTCARMMForm.getSubmit())) {
 
 			while (i < 11) {
 				ActionErrors actionErrors = new ActionErrors();
 				cARMM_MKCD = aUTCARMMForm.getArrcARMM_MKCD(i);
 				cARMM_SYCD = aUTCARMMForm.getArrcARMM_SYCD(i);
-				cARMM_JRCNT = aUTCARMMForm.getArrcARMM_JRCNT(i);			
-				cARMM_J1CNT = aUTCARMMForm.getArrcARMM_J1CNT(i);								
-				cARMM_LBLCT = aUTCARMMForm.getArrcARMM_LBLCT(i);						
-				cARMM_HTKN = aUTCARMMForm.getArrcARMM_HTKN(i);				
+				cARMM_JRCNT = aUTCARMMForm.getArrcARMM_JRCNT(i);
+				cARMM_J1CNT = aUTCARMMForm.getArrcARMM_J1CNT(i);
+				cARMM_LBLCT = aUTCARMMForm.getArrcARMM_LBLCT(i);
+				cARMM_HTKN = aUTCARMMForm.getArrcARMM_HTKN(i);
 				cARMM_EMPNO1 = aUTCARMMForm.getArrcARMM_EMPNO1(i);
 				cARMM_EMPNO2 = aUTCARMMForm.getArrcARMM_EMPNO2(i);
 				cARMM_EMPNO3 = aUTCARMMForm.getArrcARMM_EMPNO3(i);
@@ -362,113 +378,107 @@ public class AUTCARMMFAction extends Action {
 				eMPFL_EMPNM = aUTCARMMForm.getArreMPFL_EMPNM(i);
 				cARMM_YOBI = aUTCARMMForm.getArrcARMM_YOBI(i);
 
-				
+				if (!StringProcess.isBlankItem(cARMM_MKCD, cARMM_SYCD, cARMM_JRCNT, cARMM_J1CNT, cARMM_LBLCT,
+						cARMM_HTKN, cARMM_EMPNO1, eMPFL_EMPNM, cARMM_EMPNO2, cARMM_EMPNO3, cARMM_EMPNO4, cARMM_EMPNO5,
+						cARMM_EMPNO6, cARMM_EMPNO7, cARMM_EMPNO8, cARMM_EMPNO9, cARMM_EMPNO10, cARMM_YOBI)) {
 
-				if(!StringProcess.isBlankItem(cARMM_MKCD,cARMM_SYCD,cARMM_JRCNT,cARMM_J1CNT,cARMM_LBLCT,cARMM_HTKN,cARMM_EMPNO1,eMPFL_EMPNM,
-						cARMM_EMPNO2,cARMM_EMPNO3,cARMM_EMPNO4,cARMM_EMPNO5,cARMM_EMPNO6,cARMM_EMPNO7,cARMM_EMPNO8,cARMM_EMPNO9,cARMM_EMPNO10,cARMM_YOBI)) {
-								
-					
-					System.out.println("abc"+cARMM_YOBI.length());
-					if (cARMM_YOBI.length()==1){
+					// tách cARMM_YOBI để lưu từ cARMM_KUBUN1 đến cARMM_KUBUN10
+					if (cARMM_YOBI.length() == 1) {
 						cARMM_KUBUN1 = cARMM_YOBI;
-					}else if (cARMM_YOBI.length()==2){
-						cARMM_KUBUN1 = cARMM_YOBI.substring(0,1);
+					} else if (cARMM_YOBI.length() == 2) {
+						cARMM_KUBUN1 = cARMM_YOBI.substring(0, 1);
 						cARMM_KUBUN2 = cARMM_YOBI.substring(1);
-					}else if (cARMM_YOBI.length()==3){
-						cARMM_KUBUN1 = cARMM_YOBI.substring(0,1);
-						cARMM_KUBUN2 = cARMM_YOBI.substring(1,2);
+					} else if (cARMM_YOBI.length() == 3) {
+						cARMM_KUBUN1 = cARMM_YOBI.substring(0, 1);
+						cARMM_KUBUN2 = cARMM_YOBI.substring(1, 2);
 						cARMM_KUBUN3 = cARMM_YOBI.substring(2);
-					}else if (cARMM_YOBI.length()==4){
-						cARMM_KUBUN1 = cARMM_YOBI.substring(0,1);
-						cARMM_KUBUN2 = cARMM_YOBI.substring(1,2);
-						cARMM_KUBUN3 = cARMM_YOBI.substring(2,3);
+					} else if (cARMM_YOBI.length() == 4) {
+						cARMM_KUBUN1 = cARMM_YOBI.substring(0, 1);
+						cARMM_KUBUN2 = cARMM_YOBI.substring(1, 2);
+						cARMM_KUBUN3 = cARMM_YOBI.substring(2, 3);
 						cARMM_KUBUN4 = cARMM_YOBI.substring(3);
-					}else if (cARMM_YOBI.length()==5){
-						cARMM_KUBUN1 = cARMM_YOBI.substring(0,1);
-						cARMM_KUBUN2 = cARMM_YOBI.substring(1,2);
-						cARMM_KUBUN3 = cARMM_YOBI.substring(2,3);
-						cARMM_KUBUN4 = cARMM_YOBI.substring(3,4);
+					} else if (cARMM_YOBI.length() == 5) {
+						cARMM_KUBUN1 = cARMM_YOBI.substring(0, 1);
+						cARMM_KUBUN2 = cARMM_YOBI.substring(1, 2);
+						cARMM_KUBUN3 = cARMM_YOBI.substring(2, 3);
+						cARMM_KUBUN4 = cARMM_YOBI.substring(3, 4);
 						cARMM_KUBUN5 = cARMM_YOBI.substring(4);
-					}else if (cARMM_YOBI.length()==6){
-						cARMM_KUBUN1 = cARMM_YOBI.substring(0,1);
-						cARMM_KUBUN2 = cARMM_YOBI.substring(1,2);
-						cARMM_KUBUN3 = cARMM_YOBI.substring(2,3);
-						cARMM_KUBUN4 = cARMM_YOBI.substring(3,4);
-						cARMM_KUBUN5 = cARMM_YOBI.substring(4,5);
+					} else if (cARMM_YOBI.length() == 6) {
+						cARMM_KUBUN1 = cARMM_YOBI.substring(0, 1);
+						cARMM_KUBUN2 = cARMM_YOBI.substring(1, 2);
+						cARMM_KUBUN3 = cARMM_YOBI.substring(2, 3);
+						cARMM_KUBUN4 = cARMM_YOBI.substring(3, 4);
+						cARMM_KUBUN5 = cARMM_YOBI.substring(4, 5);
 						cARMM_KUBUN6 = cARMM_YOBI.substring(5);
-					}else if (cARMM_YOBI.length()==7){
-						cARMM_KUBUN1 = cARMM_YOBI.substring(0,1);
-						cARMM_KUBUN2 = cARMM_YOBI.substring(1,2);
-						cARMM_KUBUN3 = cARMM_YOBI.substring(2,3);
-						cARMM_KUBUN4 = cARMM_YOBI.substring(3,4);
-						cARMM_KUBUN5 = cARMM_YOBI.substring(4,5);
-						cARMM_KUBUN6 = cARMM_YOBI.substring(5,6);
+					} else if (cARMM_YOBI.length() == 7) {
+						cARMM_KUBUN1 = cARMM_YOBI.substring(0, 1);
+						cARMM_KUBUN2 = cARMM_YOBI.substring(1, 2);
+						cARMM_KUBUN3 = cARMM_YOBI.substring(2, 3);
+						cARMM_KUBUN4 = cARMM_YOBI.substring(3, 4);
+						cARMM_KUBUN5 = cARMM_YOBI.substring(4, 5);
+						cARMM_KUBUN6 = cARMM_YOBI.substring(5, 6);
 						cARMM_KUBUN7 = cARMM_YOBI.substring(6);
-					}else if (cARMM_YOBI.length()==8){
-						cARMM_KUBUN1 = cARMM_YOBI.substring(0,1);
-						cARMM_KUBUN2 = cARMM_YOBI.substring(1,2);
-						cARMM_KUBUN3 = cARMM_YOBI.substring(2,3);
-						cARMM_KUBUN4 = cARMM_YOBI.substring(3,4);
-						cARMM_KUBUN5 = cARMM_YOBI.substring(4,5);
-						cARMM_KUBUN6 = cARMM_YOBI.substring(5,6);
-						cARMM_KUBUN7 = cARMM_YOBI.substring(6,7);
+					} else if (cARMM_YOBI.length() == 8) {
+						cARMM_KUBUN1 = cARMM_YOBI.substring(0, 1);
+						cARMM_KUBUN2 = cARMM_YOBI.substring(1, 2);
+						cARMM_KUBUN3 = cARMM_YOBI.substring(2, 3);
+						cARMM_KUBUN4 = cARMM_YOBI.substring(3, 4);
+						cARMM_KUBUN5 = cARMM_YOBI.substring(4, 5);
+						cARMM_KUBUN6 = cARMM_YOBI.substring(5, 6);
+						cARMM_KUBUN7 = cARMM_YOBI.substring(6, 7);
 						cARMM_KUBUN8 = cARMM_YOBI.substring(7);
-					}else if (cARMM_YOBI.length()==9){
-						cARMM_KUBUN1 = cARMM_YOBI.substring(0,1);
-						cARMM_KUBUN2 = cARMM_YOBI.substring(1,2);
-						cARMM_KUBUN3 = cARMM_YOBI.substring(2,3);
-						cARMM_KUBUN4 = cARMM_YOBI.substring(3,4);
-						cARMM_KUBUN5 = cARMM_YOBI.substring(4,5);
-						cARMM_KUBUN6 = cARMM_YOBI.substring(5,6);
-						cARMM_KUBUN7 = cARMM_YOBI.substring(6,7);
-						cARMM_KUBUN8 = cARMM_YOBI.substring(7,8);
+					} else if (cARMM_YOBI.length() == 9) {
+						cARMM_KUBUN1 = cARMM_YOBI.substring(0, 1);
+						cARMM_KUBUN2 = cARMM_YOBI.substring(1, 2);
+						cARMM_KUBUN3 = cARMM_YOBI.substring(2, 3);
+						cARMM_KUBUN4 = cARMM_YOBI.substring(3, 4);
+						cARMM_KUBUN5 = cARMM_YOBI.substring(4, 5);
+						cARMM_KUBUN6 = cARMM_YOBI.substring(5, 6);
+						cARMM_KUBUN7 = cARMM_YOBI.substring(6, 7);
+						cARMM_KUBUN8 = cARMM_YOBI.substring(7, 8);
 						cARMM_KUBUN9 = cARMM_YOBI.substring(8);
-					}else if (cARMM_YOBI.length()==10){
-						cARMM_KUBUN1 = cARMM_YOBI.substring(0,1);
-						cARMM_KUBUN2 = cARMM_YOBI.substring(1,2);
-						cARMM_KUBUN3 = cARMM_YOBI.substring(2,3);
-						cARMM_KUBUN4 = cARMM_YOBI.substring(3,4);
-						cARMM_KUBUN5 = cARMM_YOBI.substring(4,5);
-						cARMM_KUBUN6 = cARMM_YOBI.substring(5,6);
-						cARMM_KUBUN7 = cARMM_YOBI.substring(6,7);
-						cARMM_KUBUN8 = cARMM_YOBI.substring(7,8);
-						cARMM_KUBUN9 = cARMM_YOBI.substring(8,9);
+					} else if (cARMM_YOBI.length() == 10) {
+						cARMM_KUBUN1 = cARMM_YOBI.substring(0, 1);
+						cARMM_KUBUN2 = cARMM_YOBI.substring(1, 2);
+						cARMM_KUBUN3 = cARMM_YOBI.substring(2, 3);
+						cARMM_KUBUN4 = cARMM_YOBI.substring(3, 4);
+						cARMM_KUBUN5 = cARMM_YOBI.substring(4, 5);
+						cARMM_KUBUN6 = cARMM_YOBI.substring(5, 6);
+						cARMM_KUBUN7 = cARMM_YOBI.substring(6, 7);
+						cARMM_KUBUN8 = cARMM_YOBI.substring(7, 8);
+						cARMM_KUBUN9 = cARMM_YOBI.substring(8, 9);
 						cARMM_KUBUN10 = cARMM_YOBI.substring(9);
-					}	
-										 									
-									
-					Autcarmm autcarmm = new Autcarmm(cARMM_MKCD, cARMM_SYCD,cARMM_EMPNO1, cARMM_EMPNO2, cARMM_EMPNO3, cARMM_EMPNO4, cARMM_EMPNO5, cARMM_EMPNO6,
-							cARMM_EMPNO7, cARMM_EMPNO8, cARMM_EMPNO9, cARMM_EMPNO10, cARMM_JRCNT, cARMM_J1CNT, cARMM_LBLCT,
-							cARMM_HTKN,  cARMM_KUBUN1, cARMM_KUBUN2,cARMM_KUBUN3, cARMM_KUBUN4, cARMM_KUBUN5, cARMM_KUBUN6, cARMM_KUBUN7, cARMM_KUBUN8,
-							cARMM_KUBUN9, cARMM_KUBUN10);			
+					}
+
+					Autcarmm autcarmm = new Autcarmm(cARMM_MKCD, cARMM_SYCD, cARMM_EMPNO1, cARMM_EMPNO2, cARMM_EMPNO3,
+							cARMM_EMPNO4, cARMM_EMPNO5, cARMM_EMPNO6, cARMM_EMPNO7, cARMM_EMPNO8, cARMM_EMPNO9,
+							cARMM_EMPNO10, cARMM_JRCNT, cARMM_J1CNT, cARMM_LBLCT, cARMM_HTKN, cARMM_KUBUN1,
+							cARMM_KUBUN2, cARMM_KUBUN3, cARMM_KUBUN4, cARMM_KUBUN5, cARMM_KUBUN6, cARMM_KUBUN7,
+							cARMM_KUBUN8, cARMM_KUBUN9, cARMM_KUBUN10);
 					
-					if (!autcarmmBO.checkExist(cARMM_EMPNO1,eMPFL_EMPNM)) {
+					//kiểm tra cARMM_EMPNO1,eMPFL_EMPNM đã có trong DB hay chưa
+					if (!autcarmmBO.checkExist(cARMM_EMPNO1, eMPFL_EMPNM)) {
 						actionErrors.add("existDBError", new ActionMessage("error.exist.db"));
-					}	
+					}
 					
-					
-					if (autcarmmBO.checkKey(cARMM_MKCD, cARMM_SYCD)==true) {
-						
-						System.out.println("co loi o day k");
+					//kiểm tra trùng khóa chính cARMM_MKCD, cARMM_SYCD
+					if (autcarmmBO.checkKey(cARMM_MKCD, cARMM_SYCD) == true) {
+
 						actionErrors.add("accError", new ActionMessage("error.trung.khoa"));
 						saveErrors(request, actionErrors);
 						return mapping.findForward("registerError");
-						
-						
-					} else {
-						System.out.println("co loi o?????k");
+
+					} else {					
 						autcarmmBO.register(autcarmm);
-						}
 					}
-					i++;
-				
+				}
+				i++;
+
 			}
-			System.out.println("thanh cong chua");
 			return mapping.findForward("registerSuccess");
-			} else {
-				// chuyen trang them Language Score
-				return mapping.findForward("register");
-			}
+		} else {			
+			return mapping.findForward("register");
+		}
 
 	}
 

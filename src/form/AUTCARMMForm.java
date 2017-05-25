@@ -2,9 +2,7 @@ package form;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
@@ -13,11 +11,21 @@ import model.bean.Autcarnm;
 import model.bean.Autempfl;
 import model.bean.Autmfopm;
 
+/**
+ * AUTCARMMForm.java
+ *
+ * Version 1.2
+ *
+ * Date: 18-05-2017
+ *
+ * Copyright
+ *
+ * Modification Logs: DATE AUTHOR DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 23-05-2017 LinhTN8 Create
+ */
 public class AUTCARMMForm extends ActionForm {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private String[] arrcARMM_MKCD = { "", "", "", "", "", "", "", "", "", "", "" };
 	private String[] arrcARMM_SYCD = { "", "", "", "", "", "", "", "", "", "", "" };
@@ -47,22 +55,28 @@ public class AUTCARMMForm extends ActionForm {
 	private String[] arrcARMM_KUBUN8 = { "", "", "", "", "", "", "", "", "", "", "" };
 	private String[] arrcARMM_KUBUN9 = { "", "", "", "", "", "", "", "", "", "", "" };
 	private String[] arrcARMM_KUBUN10 = { "", "", "", "", "", "", "", "", "", "", "" };
-	private String[] cARMM_KUBUN =  { "", "", "", "", "", "", "", "", "", ""};	
+	private String[] cARMM_KUBUN = { "", "", "", "", "", "", "", "", "", "" };
 
 	private ArrayList<Autcarmm> listAUTCARMM;
 	private ArrayList<Autempfl> listAUTEMPFL;
 	private ArrayList<Autcarnm> listAUTCARNM;
 	private ArrayList<Autmfopm> listAUTMFOPM;
 	private String submit;
-	private Integer[] stt = { 1, 2, 3 , 4, 5, 6, 7, 8, 9, 10 };
+	private Integer[] stt = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
 	/**
 	 * @return the arrcARMM_MKCD
+	 * @return arrcARMM_MKCD
 	 */
 	public String[] getArrcARMM_MKCD() {
 		return arrcARMM_MKCD;
 	}
 
+	/***
+	 * 
+	 * @param index
+	 * @return
+	 */
 	public String getArrcARMM_MKCD(int index) {
 		return arrcARMM_MKCD[index];
 	}
@@ -113,34 +127,33 @@ public class AUTCARMMForm extends ActionForm {
 		this.arrcARMM_SYCD[index] = arrcARMM_SYCD;
 	}
 
-	
-	
-	
 	/**
 	 * @return the cARMM_KUBUN
 	 */
 	public String[] getcARMM_KUBUN() {
 		return cARMM_KUBUN;
 	}
-	
+
 	/**
 	 * @return the cARMM_KUBUN
 	 */
 	public String getcARMM_KUBUN(int index) {
 		return cARMM_KUBUN[index];
 	}
-	
+
 	/**
-	 * @param i the cARMM_KUBUN to set
+	 * @param i
+	 *            the cARMM_KUBUN to set
 	 */
 	public void setcARMM_KUBUN(String[] i) {
 		this.cARMM_KUBUN = i;
 	}
-	
+
 	/**
-	 * @param cARMM_KUBUN the cARMM_KUBUN to set
+	 * @param cARMM_KUBUN
+	 *            the cARMM_KUBUN to set
 	 */
-	public void setcARMM_KUBUN(int index,String cARMM_KUBUN) {
+	public void setcARMM_KUBUN(int index, String cARMM_KUBUN) {
 		this.cARMM_KUBUN[index] = cARMM_KUBUN;
 	}
 

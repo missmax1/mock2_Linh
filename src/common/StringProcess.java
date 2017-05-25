@@ -10,14 +10,14 @@ import java.util.regex.Pattern;
  *
  * Version 1.0
  *
- * Date: 05-05-2017
+ * Date: 22-05-2017
  *
  * Copyright 
  *
  * Modification Logs:
  * DATE                 AUTHOR          DESCRIPTION
  * -----------------------------------------------------------------------
- * 05-05-2017        	TrucNT2          Create
+ * 22-05-2017        	LinhTN8          Create
  */
 
 
@@ -63,37 +63,6 @@ public class StringProcess {
 		return false;
 	}
 	
-	/**
-	 * Ham kiem tra xem xau co nhap dung ngay  hay khong
-	 * @param s
-	 * @return boolean
-	 */
-	
-	 public static boolean validateJavaDate(String strDate)
-	 {
-	     if (strDate.trim().equals(""))
-	     {
-	         return true;
-	     }
-	     else
-	     {
-	         SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy/MM/dd");
-	         sdfrmt.setLenient(false);
-	         Date javaDate = null;
-	         try
-	         {
-	             javaDate = sdfrmt.parse(strDate); 
-	             System.out.println("Date after validation: " + javaDate);
-	         }
-	         catch (ParseException e)
-	         {
-	             System.out.println("The date you provided is in an " +"invalid date format.");
-	             return true;
-	         }
-	         return false;
-	     }
-	 }
-
 	 
 	 /**
 	 	 * Ham kiem tra xau co do dai lon hon 10 ki tu
@@ -170,6 +139,32 @@ public class StringProcess {
 				return (str.matches(regex)) ? true : false;
 			}
 
+			
+			/***
+			 * 
+			 * Ham kiem tra record co rong hay khong ?
+			 * Method check record is blank.
+			 * 
+			 * @param cARMM_MKCD
+			 * @param cARMM_SYCD
+			 * @param cARMM_JRCNT
+			 * @param cARMM_J1CNT
+			 * @param cARMM_LBLCT
+			 * @param cARMM_HTKN
+			 * @param cARMM_EMPNO1
+			 * @param eMPFL_EMPNM
+			 * @param cARMM_EMPNO2
+			 * @param cARMM_EMPNO3
+			 * @param cARMM_EMPNO4
+			 * @param cARMM_EMPNO5
+			 * @param cARMM_EMPNO6
+			 * @param cARMM_EMPNO7
+			 * @param cARMM_EMPNO8
+			 * @param cARMM_EMPNO9
+			 * @param cARMM_EMPNO10
+			 * @param cARMM_YOBI
+			 * @return true || flase
+			 */
 			public static boolean isBlankItem(String cARMM_MKCD, String cARMM_SYCD, String cARMM_JRCNT,
 					String cARMM_J1CNT, String cARMM_LBLCT, String cARMM_HTKN, String cARMM_EMPNO1, String eMPFL_EMPNM,
 					String cARMM_EMPNO2, String cARMM_EMPNO3, String cARMM_EMPNO4, String cARMM_EMPNO5,
@@ -188,8 +183,7 @@ public class StringProcess {
 				
 					return true;
 				}
-				
-				
+								
 				return false;
 			}
 

@@ -1,6 +1,7 @@
 eclipse.preferences.version=1
 encoding//WebContent/register.jsp=UTF-8
 encoding//src/action/AUTCARMMFAction.java=UTF-8
+encoding//src/model/bo/AutcarmmBO.java=UTF-8
 encoding//src/model/dao/AutcarmmDAO.java=UTF-8
 encoding//src/model/dao/AutcarnmDAO.java=UTF-8
 encoding//src/model/dao/AutempflDAO.java=UTF-8

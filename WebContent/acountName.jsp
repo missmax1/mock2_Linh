@@ -1,8 +1,4 @@
-<%@page import="model.bean.LanguageScore"%>
-<%@page import="model.bean.Department"%>
-<%@page import="model.bean.Status"%>
-<%@page import="model.bean.Account"%>
-<%@page import="model.bean.Language"%>
+
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>

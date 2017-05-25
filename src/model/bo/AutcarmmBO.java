@@ -1,37 +1,62 @@
 package model.bo;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.bean.Autcarmm;
 import model.dao.AutcarmmDAO;
 
+/**
+ * AutcarmmBO.java
+ *
+ * Version 1.0
+ *
+ * Date: 18-05-2017
+ *
+ * Copyright
+ *
+ * Modification Logs: DATE AUTHOR DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 18-05-2017 LinhTN8 Create
+ */
 public class AutcarmmBO {
-	
+
 	AutcarmmDAO autcarmmDAO = new AutcarmmDAO();
 
-
-
-	public static ArrayList<Autcarmm> listAUTCARMM() {
-		
-		return null;
-	}
-
+	/***
+	 * 
+	 * Thêm mới autcarmm
+	 * 
+	 * @param autcarmm
+	 * @throws Exception
+	 */
 	public void register(Autcarmm autcarmm) throws Exception {
-		
+
 		autcarmmDAO.register(autcarmm);
-		
+
 	}
 
-	public boolean checkKey(String cARMM_MKCD, String cARMM_SYCD) throws Exception   {
-		return autcarmmDAO.checkKey(cARMM_MKCD,cARMM_SYCD);
-		// TODO Auto-generated method stub
+	/***
+	 * 
+	 * @param cARMM_MKCD
+	 * @param cARMM_SYCD
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean checkKey(String cARMM_MKCD, String cARMM_SYCD) throws Exception {
 		
+		return autcarmmDAO.checkKey(cARMM_MKCD, cARMM_SYCD);
 	}
 
+	/***
+	 * 
+	 * @param cARMM_EMPNO
+	 * @param eMPFL_EMPNM
+	 * @return
+	 * @throws Exception
+	 */
 	public boolean checkExist(String cARMM_EMPNO, String eMPFL_EMPNM) throws Exception {
-		// TODO Auto-generated method stub
-		return autcarmmDAO.checkExist(cARMM_EMPNO ,eMPFL_EMPNM);
+
+		return autcarmmDAO.checkExist(cARMM_EMPNO, eMPFL_EMPNM);
 	}
-	
+
 }
