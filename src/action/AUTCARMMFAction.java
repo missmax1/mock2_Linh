@@ -26,6 +26,8 @@ import model.bo.AutmfopmBO;
 
 public class AUTCARMMFAction extends Action {
 
+	private String cARMM_KUBUNs[];
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -92,7 +94,7 @@ public class AUTCARMMFAction extends Action {
 		aUTCARMMForm.setListAUTCARMM(listAUTCARMM);
 
 		// nhan nut submit o trang them language
-		if ("submit".equals(aUTCARMMForm.getSubmit())) {
+		if ("登録(Ｎ)".equals(aUTCARMMForm.getSubmit())) {
 			ActionErrors actionErrors = new ActionErrors();
 			int j = 1;
 			while (j < 11) {
@@ -327,7 +329,7 @@ public class AUTCARMMFAction extends Action {
 		}
 
 		// nhan nut submit o trang
-		if ("submit".equals(aUTCARMMForm.getSubmit())) {
+		if ("登録(Ｎ)".equals(aUTCARMMForm.getSubmit())) {
 
 			while (i < 11) {
 				ActionErrors actionErrors = new ActionErrors();
@@ -366,11 +368,78 @@ public class AUTCARMMFAction extends Action {
 						cARMM_EMPNO2,cARMM_EMPNO3,cARMM_EMPNO4,cARMM_EMPNO5,cARMM_EMPNO6,cARMM_EMPNO7,cARMM_EMPNO8,cARMM_EMPNO9,cARMM_EMPNO10,cARMM_YOBI)) {
 								
 					
-					System.out.println("cARMM_JRCNT="+cARMM_JRCNT);
-					Autcarmm autcarmm = new Autcarmm(cARMM_MKCD, cARMM_SYCD, cARMM_JRCNT, cARMM_J1CNT, cARMM_LBLCT,
-							cARMM_HTKN, cARMM_EMPNO1, cARMM_EMPNO2, cARMM_EMPNO3, cARMM_EMPNO4, cARMM_EMPNO5, cARMM_EMPNO6,
-							cARMM_EMPNO7, cARMM_EMPNO8, cARMM_EMPNO9, cARMM_EMPNO10, cARMM_KUBUN1, cARMM_KUBUN2,
-							cARMM_KUBUN3, cARMM_KUBUN4, cARMM_KUBUN5, cARMM_KUBUN6, cARMM_KUBUN7, cARMM_KUBUN8,
+					System.out.println("abc"+cARMM_YOBI.length());
+					if (cARMM_YOBI.length()==1){
+						cARMM_KUBUN1 = cARMM_YOBI;
+					}else if (cARMM_YOBI.length()==2){
+						cARMM_KUBUN1 = cARMM_YOBI.substring(0,1);
+						cARMM_KUBUN2 = cARMM_YOBI.substring(1);
+					}else if (cARMM_YOBI.length()==3){
+						cARMM_KUBUN1 = cARMM_YOBI.substring(0,1);
+						cARMM_KUBUN2 = cARMM_YOBI.substring(1,2);
+						cARMM_KUBUN3 = cARMM_YOBI.substring(2);
+					}else if (cARMM_YOBI.length()==4){
+						cARMM_KUBUN1 = cARMM_YOBI.substring(0,1);
+						cARMM_KUBUN2 = cARMM_YOBI.substring(1,2);
+						cARMM_KUBUN3 = cARMM_YOBI.substring(2,3);
+						cARMM_KUBUN4 = cARMM_YOBI.substring(3);
+					}else if (cARMM_YOBI.length()==5){
+						cARMM_KUBUN1 = cARMM_YOBI.substring(0,1);
+						cARMM_KUBUN2 = cARMM_YOBI.substring(1,2);
+						cARMM_KUBUN3 = cARMM_YOBI.substring(2,3);
+						cARMM_KUBUN4 = cARMM_YOBI.substring(3,4);
+						cARMM_KUBUN5 = cARMM_YOBI.substring(4);
+					}else if (cARMM_YOBI.length()==6){
+						cARMM_KUBUN1 = cARMM_YOBI.substring(0,1);
+						cARMM_KUBUN2 = cARMM_YOBI.substring(1,2);
+						cARMM_KUBUN3 = cARMM_YOBI.substring(2,3);
+						cARMM_KUBUN4 = cARMM_YOBI.substring(3,4);
+						cARMM_KUBUN5 = cARMM_YOBI.substring(4,5);
+						cARMM_KUBUN6 = cARMM_YOBI.substring(5);
+					}else if (cARMM_YOBI.length()==7){
+						cARMM_KUBUN1 = cARMM_YOBI.substring(0,1);
+						cARMM_KUBUN2 = cARMM_YOBI.substring(1,2);
+						cARMM_KUBUN3 = cARMM_YOBI.substring(2,3);
+						cARMM_KUBUN4 = cARMM_YOBI.substring(3,4);
+						cARMM_KUBUN5 = cARMM_YOBI.substring(4,5);
+						cARMM_KUBUN6 = cARMM_YOBI.substring(5,6);
+						cARMM_KUBUN7 = cARMM_YOBI.substring(6);
+					}else if (cARMM_YOBI.length()==8){
+						cARMM_KUBUN1 = cARMM_YOBI.substring(0,1);
+						cARMM_KUBUN2 = cARMM_YOBI.substring(1,2);
+						cARMM_KUBUN3 = cARMM_YOBI.substring(2,3);
+						cARMM_KUBUN4 = cARMM_YOBI.substring(3,4);
+						cARMM_KUBUN5 = cARMM_YOBI.substring(4,5);
+						cARMM_KUBUN6 = cARMM_YOBI.substring(5,6);
+						cARMM_KUBUN7 = cARMM_YOBI.substring(6,7);
+						cARMM_KUBUN8 = cARMM_YOBI.substring(7);
+					}else if (cARMM_YOBI.length()==9){
+						cARMM_KUBUN1 = cARMM_YOBI.substring(0,1);
+						cARMM_KUBUN2 = cARMM_YOBI.substring(1,2);
+						cARMM_KUBUN3 = cARMM_YOBI.substring(2,3);
+						cARMM_KUBUN4 = cARMM_YOBI.substring(3,4);
+						cARMM_KUBUN5 = cARMM_YOBI.substring(4,5);
+						cARMM_KUBUN6 = cARMM_YOBI.substring(5,6);
+						cARMM_KUBUN7 = cARMM_YOBI.substring(6,7);
+						cARMM_KUBUN8 = cARMM_YOBI.substring(7,8);
+						cARMM_KUBUN9 = cARMM_YOBI.substring(8);
+					}else if (cARMM_YOBI.length()==10){
+						cARMM_KUBUN1 = cARMM_YOBI.substring(0,1);
+						cARMM_KUBUN2 = cARMM_YOBI.substring(1,2);
+						cARMM_KUBUN3 = cARMM_YOBI.substring(2,3);
+						cARMM_KUBUN4 = cARMM_YOBI.substring(3,4);
+						cARMM_KUBUN5 = cARMM_YOBI.substring(4,5);
+						cARMM_KUBUN6 = cARMM_YOBI.substring(5,6);
+						cARMM_KUBUN7 = cARMM_YOBI.substring(6,7);
+						cARMM_KUBUN8 = cARMM_YOBI.substring(7,8);
+						cARMM_KUBUN9 = cARMM_YOBI.substring(8,9);
+						cARMM_KUBUN10 = cARMM_YOBI.substring(9);
+					}	
+										 									
+									
+					Autcarmm autcarmm = new Autcarmm(cARMM_MKCD, cARMM_SYCD,cARMM_EMPNO1, cARMM_EMPNO2, cARMM_EMPNO3, cARMM_EMPNO4, cARMM_EMPNO5, cARMM_EMPNO6,
+							cARMM_EMPNO7, cARMM_EMPNO8, cARMM_EMPNO9, cARMM_EMPNO10, cARMM_JRCNT, cARMM_J1CNT, cARMM_LBLCT,
+							cARMM_HTKN,  cARMM_KUBUN1, cARMM_KUBUN2,cARMM_KUBUN3, cARMM_KUBUN4, cARMM_KUBUN5, cARMM_KUBUN6, cARMM_KUBUN7, cARMM_KUBUN8,
 							cARMM_KUBUN9, cARMM_KUBUN10);			
 					
 					if (!autcarmmBO.checkExist(cARMM_EMPNO1,eMPFL_EMPNM)) {
@@ -378,14 +447,17 @@ public class AUTCARMMFAction extends Action {
 					}	
 					
 					
-					if (autcarmmBO.checkKey(cARMM_MKCD, cARMM_SYCD)) {
-						System.out.println("co loi o?????k");
-						autcarmmBO.register(autcarmm);
-					} else {
+					if (autcarmmBO.checkKey(cARMM_MKCD, cARMM_SYCD)==true) {
+						
 						System.out.println("co loi o day k");
 						actionErrors.add("accError", new ActionMessage("error.trung.khoa"));
 						saveErrors(request, actionErrors);
 						return mapping.findForward("registerError");
+						
+						
+					} else {
+						System.out.println("co loi o?????k");
+						autcarmmBO.register(autcarmm);
 						}
 					}
 					i++;

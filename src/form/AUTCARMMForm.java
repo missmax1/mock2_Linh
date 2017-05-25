@@ -47,7 +47,7 @@ public class AUTCARMMForm extends ActionForm {
 	private String[] arrcARMM_KUBUN8 = { "", "", "", "", "", "", "", "", "", "", "" };
 	private String[] arrcARMM_KUBUN9 = { "", "", "", "", "", "", "", "", "", "", "" };
 	private String[] arrcARMM_KUBUN10 = { "", "", "", "", "", "", "", "", "", "", "" };
-
+	private String[] cARMM_KUBUN =  { "", "", "", "", "", "", "", "", "", ""};	
 
 	private ArrayList<Autcarmm> listAUTCARMM;
 	private ArrayList<Autempfl> listAUTEMPFL;
@@ -111,6 +111,37 @@ public class AUTCARMMForm extends ActionForm {
 	 */
 	public void setArrcARMM_SYCD(int index, String arrcARMM_SYCD) {
 		this.arrcARMM_SYCD[index] = arrcARMM_SYCD;
+	}
+
+	
+	
+	
+	/**
+	 * @return the cARMM_KUBUN
+	 */
+	public String[] getcARMM_KUBUN() {
+		return cARMM_KUBUN;
+	}
+	
+	/**
+	 * @return the cARMM_KUBUN
+	 */
+	public String getcARMM_KUBUN(int index) {
+		return cARMM_KUBUN[index];
+	}
+	
+	/**
+	 * @param i the cARMM_KUBUN to set
+	 */
+	public void setcARMM_KUBUN(String[] i) {
+		this.cARMM_KUBUN = i;
+	}
+	
+	/**
+	 * @param cARMM_KUBUN the cARMM_KUBUN to set
+	 */
+	public void setcARMM_KUBUN(int index,String cARMM_KUBUN) {
+		this.cARMM_KUBUN[index] = cARMM_KUBUN;
 	}
 
 	/**

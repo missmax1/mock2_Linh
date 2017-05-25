@@ -4,6 +4,27 @@ public class Autcarnm {
 
 		private String cARNM_SHSYCD;
 		private String cARNM_NAME;
+		
+		
+		
+		
+		
+		/**
+		 * 
+		 */
+		public Autcarnm() {
+			super();
+			// TODO Auto-generated constructor stub
+		}
+		/**
+		 * @param cARNM_SHSYCD
+		 * @param cARNM_NAME
+		 */
+		public Autcarnm(String cARNM_SHSYCD, String cARNM_NAME) {
+			super();
+			this.cARNM_SHSYCD = cARNM_SHSYCD;
+			this.cARNM_NAME = cARNM_NAME;
+		}
 		/**
 		 * @return the cARNM_SHSYCD
 		 */

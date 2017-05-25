@@ -13,69 +13,18 @@ import model.bean.Autcarmm;
 public class AutcarmmDAO {
 
 	
-	String url = "jdbc:sqlserver://localhost:1433;instance=MSSQLSERVER;databaseName=Mock2";
-	String userName = "sa";
-	String password = "12345678";
+	
 	Connection connection;
 	Statement stmt;
-	private int num = 0;
+
 	/**
 	 * Kết nối csdl
+	 * @return 
 	 * 
 	 * @throws Exception
 	 */
-	void connect() throws Exception {
-		try {
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			connection = DriverManager.getConnection(url, userName, password);
-			System.out.println("Ket noi thanh cong");
-		} catch (SQLException e) {
-
-			System.out.println("Ket noi loi");
-			throw new SQLException("Error occur: " + e.getMessage());
-		} catch (ClassNotFoundException e) {
-
-			System.out.println("Ket noi loi");
-			throw new ClassNotFoundException("Error occur: " + e.getMessage());
-		}
-	}
-	
-	
-	public void register(String cARMM_MKCD, String cARMM_SYCD, String cARMM_JRCNT, String cARMM_J1CNT,
-			String cARMM_LBLCT, String cARMM_HTKN, String cARMM_YOBI, String cARMM_EMPNO1, String eMPFL_EMPNM,
-			String cARMM_EMPNO2, String cARMM_EMPNO3, String cARMM_EMPNO4, String cARMM_EMPNO5, String cARMM_EMPNO6,
-			String cARMM_EMPNO7, String cARMM_EMPNO8, String cARMM_EMPNO9, String cARMM_EMPNO10) throws Exception {
-		
-		
-		connect();
-		
-		String sql = String.format(
-				"INSERT INTO AUTCARMM(CARMM_MKCD,CARMM_SYCD,CARMM_JRCNT,CARMM_J1CNT,CARMM_LBLCT,CARMM_HTKN,CARMM_YOBI,"
-				+ "CARMM_EMPNO1,CARMM_EMPNO2,CARMM_EMPNO3,CARMM_EMPNO4,CARMM_EMPNO5,CARMM_EMPNO6,CARMM_EMPNO7,"
-				+ "CARMM_EMPNO8,CARMM_EMPNO9,CARMM_EMPNO10) "
-						+ " VALUES ( '%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s' )",
-						cARMM_MKCD, cARMM_SYCD, cARMM_JRCNT, cARMM_J1CNT, cARMM_LBLCT, cARMM_HTKN,cARMM_YOBI,"CAR01"
-						,cARMM_EMPNO2,cARMM_EMPNO3,cARMM_EMPNO4,cARMM_EMPNO5,cARMM_EMPNO6,cARMM_EMPNO7,cARMM_EMPNO8
-						,cARMM_EMPNO9,cARMM_EMPNO10);
-		
-		System.out.println("sql "+ sql);
-		try {
-			 stmt = connection.createStatement();
-			stmt.executeUpdate(sql);
-		} catch (SQLException e) {;}	
-		
-		finally {
-			try {
-				connection.close();
-				stmt.close();
-			} catch (SQLException e) {;}
-				
-		}
-		
-	}
-
-	public void register(Autcarmm autcarmm) throws Exception {
-		connect();
+	public boolean register(Autcarmm autcarmm) throws Exception {
+		connection = DataAccess.getConnect();
 	
 		String sql ="insert into AUTCARMM (CARMM_MKCD,CARMM_SYCD,"
 				+ "CARMM_EMPNO1,CARMM_EMPNO2,CARMM_EMPNO3,CARMM_EMPNO4,CARMM_EMPNO5,CARMM_EMPNO6,CARMM_EMPNO7,"
@@ -112,26 +61,27 @@ public class AutcarmmDAO {
 		pstmt.setString(24, autcarmm.getcARMM_KUBUN8());
 		pstmt.setString(25, autcarmm.getcARMM_KUBUN9());
 		pstmt.setString(26, autcarmm.getcARMM_KUBUN10());
-		
-		
+				
 		pstmt.executeUpdate();
+		return true;
 		
 	}
 
 
 	public boolean checkKey(String cARMM_MKCD, String cARMM_SYCD) throws Exception   {
-		String sql = "select CARMM_MKCD,CARMM_SYCD, count(*) as dem from AUTCARMM where CARMM_MKCD = '"+cARMM_MKCD+"' and CARMM_SYCD = "+cARMM_SYCD+" group by CARMM_MKCD,CARMM_SYCD  ";
-		connect();
-		
+		String sql = "select CARMM_MKCD,CARMM_SYCD, count(*) as dem from AUTCARMM where CARMM_MKCD = '"+cARMM_MKCD+"'"
+				+ " and CARMM_SYCD = "+cARMM_SYCD+" group by CARMM_MKCD,CARMM_SYCD  ";
+		connection = DataAccess.getConnect();
+		int num =0;
 		System.out.println(sql);
-		ResultSet rs = null;
+		
 		try {
 			stmt = connection.createStatement();
-			rs = stmt.executeQuery(sql);
+			ResultSet rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
 				num = rs.getInt("dem");
-				System.out.println(num);
+				
 			}
 		} catch (Exception e) {
 			throw new Exception("Error occur: "+ e.getMessage());
@@ -149,21 +99,17 @@ public class AutcarmmDAO {
 		}
 		
 		return (num != 0)? true : false;		
-		
-	
-		
-	
-			
+				
 		
 	}
 
 
-	public boolean checkExist(String cARMM_EMPNO1, String eMPFL_EMPNM) throws Exception {
+	public boolean checkExist(String cARMM_EMPNO, String eMPFL_EMPNM) throws Exception {
 		String sql = " select EMPFL_EMPNO,EMPFL_EMPNM, count(*) as dem from AUTEMPFL where EMPFL_EMPNO ="+
-						" '"+cARMM_EMPNO1+"' and EMPFL_EMPNM = '"+eMPFL_EMPNM+"' group by EMPFL_EMPNO,EMPFL_EMPNM  ";	
+						" '"+cARMM_EMPNO+"' and EMPFL_EMPNM = '"+eMPFL_EMPNM+"' group by EMPFL_EMPNO,EMPFL_EMPNM  ";	
 		
-		connect();
-		
+		connection = DataAccess.getConnect();
+		int num =0;
 		System.out.println("2"+sql);
 		ResultSet rs = null;
 		try {

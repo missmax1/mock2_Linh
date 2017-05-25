@@ -47,7 +47,7 @@ public class AutcarnmDAO {
 			stmt = connection.createStatement();
 			rs = stmt.executeQuery(sql);
 		} catch (SQLException e) {
-			throw new SQLException("Câu lệnh sai : " + e.getMessage());
+			throw new SQLException("Error occur : " + e.getMessage());
 		}
 
 		ArrayList<Autcarnm> list = new ArrayList<Autcarnm>();

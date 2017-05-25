@@ -5,6 +5,29 @@ public class Autempfl {
 	
 	private String  eMPFL_EMPNO;
 	private String eMPFL_EMPNM;
+	
+	
+	
+	
+	
+	
+	
+	/**
+	 * 
+	 */
+	public Autempfl() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	/**
+	 * @param eMPFL_EMPNO
+	 * @param eMPFL_EMPNM
+	 */
+	public Autempfl(String eMPFL_EMPNO, String eMPFL_EMPNM) {
+		super();
+		this.eMPFL_EMPNO = eMPFL_EMPNO;
+		this.eMPFL_EMPNM = eMPFL_EMPNM;
+	}
 	/**
 	 * @return the eMPFL_EMPNO
 	 */
